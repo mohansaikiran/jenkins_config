@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DIRECTORY_PATH = "https://github.com/mohansaikiran/jenkins_config"
-        TESTING_ENVIRONMENT = "Jenkins_test_env_Mohan"
     }
 
     stages {
