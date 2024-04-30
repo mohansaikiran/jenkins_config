@@ -19,7 +19,7 @@ pipeline {
                         echo 'Starting unit testing using JUnit...' > ${logFilePathNew}
                         echo 'Testing the feature working...' >> ${logFilePathNew}
                         echo 'Unit testing completed and no issues found' >> ${logFilePathNew}
-                        echo '\n\nStarting Integration testing using Selenium WebDriver...' > ${logFilePathNew}
+                        echo 'Starting Integration testing using Selenium WebDriver...' > ${logFilePathNew}
                         echo 'End to End Testing of the complete product working...' >> ${logFilePathNew}
                         echo 'Integration testing completed and no issues found' >> ${logFilePathNew} 
                 """
