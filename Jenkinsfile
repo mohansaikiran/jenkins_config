@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        DIRECTORY_PATH = "https://github.com/jenkins_source_code"
-        TESTING_ENVIRONMENT = "Jenkins_test_env_Mohan"
-        PRODUCTION_ENVIRONMENT = "Jenkins_prod_env_Mohan"
-    }
-
     stages {
         stage('Build') {
             steps {
