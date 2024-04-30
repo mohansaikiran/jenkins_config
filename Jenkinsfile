@@ -10,35 +10,52 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Fetch the source code from the directory path specified by $DIRECTORY_PATH"
-                echo "Compile the code and generate any necessary artifacts"
+                echo "Compiling the code and generating necessary artifacts using Maven..."
             }
         }
-        stage('Test') {
+        stage('Unit and Integration Tests') {
             steps {
-                echo "Unit Tests"
-                echo "Integration Tests"
+                echo "Performing Unit Testing using JUnit..."
+                echo "Performing Integration Testing using Selenium WebDriver..."
             }
         }
-        stage('Code Quality Check') {
+        stage('Code Analysis') {
             steps {
-                echo "Check the quality of the code"
+                echo "Analysing the code using ESLint..."
             }
         }
-        stage('Deploy') {
+        stage('Security scan') {
             steps {
-                echo "Deploying the application to a testing environment specified by the name $TESTING_ENVIRONMENT"
+                def logFilePath = "${WORKSPACE}/security-output.log"
+                echo "Performing security scans using Veracode for vulnerabilities..."
+
+                sh """ 
+                    echo 'Performing security scans using Veracode for vulnerabilities...' >> ${logFilePath}
+                    echo 'Security checks completed and no vulnerabilities found' >> ${logFilePath}
+                """
+            }
+            post {
+                success {
+                    emailext subject: "Security Scan Status: SUCCESS",
+                            body: "The security scan completed successfully",
+                            to:"kiranms20@gmail.com",
+                            attachmentsPattern: "security-output.log"
+                }
             }
         }
-        stage('Approval') {
+        stage('Deploy to Staging') {
             steps {
-                echo "Waiting for approval"
-                sleep(10)
+                echo "Deploying the application to the staging server on AWS EC2 instance..."
+            }
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Executing integration tests on the staging environment..."
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo "Deploying the application to production environment specified by the name $PRODUCTION_ENVIRONMENT"
+                echo "Deploying the application to the production server on AWS EC2 instance..."
             }
         }
     }
