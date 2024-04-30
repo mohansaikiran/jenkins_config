@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DIRECTORY_PATH = "https://github.com/mohansaikiran/jenkins_config"
+        new = "hi"
     }
 
     stages {
